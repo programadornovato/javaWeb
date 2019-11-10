@@ -1,0 +1,5 @@
+
+*.properties
+target/javaWeb-1.0-SNAPSHOT/WEB-INF/classes/.netbeans_automatic_build
+target/javaWeb-1.0-SNAPSHOT/index.jsp
+*.war
