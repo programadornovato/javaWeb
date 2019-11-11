@@ -16,7 +16,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm">
-                    <form>
+                    <form action="index.jsp" method="post">
                         <div class="form-group">
                             <label >Humano escribe tu nombre</label>
                             <input type="text" class="form-control" name="nombreDelHumano" placeholder="Nombre">
@@ -35,8 +35,24 @@
                         <%
                             String nombre=request.getParameter("nombreDelHumano");
                             String edad=request.getParameter("edadDelHumano");
-                            String saludarAlHumano="Hola "+nombre+" a tus "+edad+" años ya esta viejo";
-                            out.print(saludarAlHumano);
+                            if(nombre!=null && edad!=null){
+                                int edadNumero=Integer.parseInt(edad);
+                                String mensajeEdad="";
+                                if(edadNumero>=1 && edadNumero<=18){
+                                    mensajeEdad="eres un humano inexperto";
+                                }
+                                if(edadNumero>18 && edadNumero<=30){
+                                    mensajeEdad="eres un humano joven e inexperto";
+                                }
+                                if(edadNumero>30){
+                                    mensajeEdad="eres un humano viejo";
+                                }
+                                String saludarAlHumano="Hola "+nombre+" a tus "+edad+" años "+mensajeEdad;
+                                out.print(saludarAlHumano);
+                            }
+                            else{
+                                out.print("Humano estupido, te pedi que colocaras tu nombre y tu edad");
+                            }
                         %>
                     </div>
                 </div>
