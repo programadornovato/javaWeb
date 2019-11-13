@@ -51,7 +51,7 @@
                                 <td><%= rs.getString(3)%></td>
                                 <td><%= rs.getString(4)%></td>
                                 <td>
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <a href="editar.jsp?id=<%= rs.getString(1)%>&nombre=<%= rs.getString(2)%>&direccion=<%= rs.getString(3)%>&telefono=<%= rs.getString(4)%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>                                    
