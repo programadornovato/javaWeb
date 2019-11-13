@@ -52,7 +52,7 @@
                                 <td><%= rs.getString(4)%></td>
                                 <td>
                                     <a href="editar.jsp?id=<%= rs.getString(1)%>&nombre=<%= rs.getString(2)%>&direccion=<%= rs.getString(3)%>&telefono=<%= rs.getString(4)%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <a href="borrar.jsp?id=<%= rs.getString(1)%>" class="ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>                                    
                             <%
