@@ -11,16 +11,23 @@
     </head>
     <body>
         <%
-            HttpSession sesion=request.getSession();
-            if( sesion.getAttribute("logueado")==null ||  sesion.getAttribute("logueado").equals("0") ){
+            HttpSession sesion = request.getSession();
+            if (sesion.getAttribute("logueado") == null || sesion.getAttribute("logueado").equals("0")) {
                 response.sendRedirect("login.jsp");
             }
             Connection con = null;
             Statement st = null;
             ResultSet rs = null;
         %>
-        <div class="container mt-5">
-            <div class="row">
+        <div class="container">
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand">Programador novato</a>
+                <form class="form-inline" action="logout.jsp">
+                    <a><i class="fa fa-user-circle" aria-hidden="true"></i> <%= sesion.getAttribute("user")%></a>
+                    <button class="btn btn-outline-danger my-2 my-sm-0 ml-2" type="submit">Log out</button>
+                </form>
+            </nav>
+            <div class="row mt-2">
                 <div class="col-sm">
                     <table class="table table-striped">
                         <thead>
@@ -29,7 +36,7 @@
                                 <th scope="col" >
                                     <a href="crear.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                                 </th>
-                                
+
                             </tr>
                             <tr>
                                 <th scope="col">ID</th>
@@ -61,9 +68,8 @@
                             </tr>                                    
                             <%
                                     }
-                                } 
-                                catch (Exception e) {
-                                    out.print("error mysql "+e);
+                                } catch (Exception e) {
+                                    out.print("error mysql " + e);
                                 }
 
                             %>
