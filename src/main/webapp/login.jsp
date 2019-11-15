@@ -1,3 +1,4 @@
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-sm">
-                    <form>
+                    <form method="post" action="login.jsp" >
                         <div class="form-group">
                             <label>Usuario</label>
                             <input type="text" class="form-control" name="user" placeholder="Humano pon tu usuario">
@@ -22,23 +23,34 @@
                         </div>
                         <button type="submit" class="btn btn-primary" name="login" >Login</button>
                     </form>
+                    <%
+                        Connection con = null;
+                        Statement st = null;
+                        ResultSet rs = null;
+
+                        if (request.getParameter("login") != null) {
+                            String user = request.getParameter("user");
+                            String password = request.getParameter("password");
+                            HttpSession sesion = request.getSession();
+                            try {
+                                Class.forName("com.mysql.jdbc.Driver");
+                                con = DriverManager.getConnection("jdbc:mysql://localhost/jsp?user=eugenio&password=123456");
+                                st = con.createStatement();
+                                rs = st.executeQuery(" SELECT * FROM `user` where user='" + user + "' and password='" + password + "'; ");
+                                while (rs.next()) {
+                                    sesion.setAttribute("logueado", "1");
+                                    sesion.setAttribute("user", rs.getString("user"));
+                                    sesion.setAttribute("id", rs.getString("id"));
+                                    response.sendRedirect("index.jsp");
+                                }
+                                out.print(" <div class=\"alert alert-danger\" role=\"alert\"> Usuario no valido </div>");
+                            } catch (Exception e) {
+                            }
+                        }
+                    %>
+
                 </div>
             </div>
         </div>
     </body>
-    <%
-        if( request.getParameter("login")!=null ){
-            String user=request.getParameter("user");
-            String password=request.getParameter("password");
-            HttpSession sesion=request.getSession();
-            if(user.equals("admin") && password.equals("admin")){
-                sesion.setAttribute("logueado", "1");
-                sesion.setAttribute("user", user);
-                response.sendRedirect("index.jsp");
-            }
-            else{
-                out.print("Humano te quivocaste usuario o contraseña invalidos");
-            }
-        }
-    %>
 </html>
