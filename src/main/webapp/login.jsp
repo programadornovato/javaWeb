@@ -1,6 +1,5 @@
-<%@page import="java.math.BigInteger"%>
-<%@page import="java.security.MessageDigest"%>
 <%@page import="java.sql.*"%>
+<%@page import="Utils.Encriptar" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +28,7 @@
                         Connection con = null;
                         Statement st = null;
                         ResultSet rs = null;
-
+                        Encriptar enc=new Encriptar();
                         if (request.getParameter("login") != null) {
                             String user = request.getParameter("user");
                             String password = request.getParameter("password");
@@ -38,7 +37,7 @@
                                 Class.forName("com.mysql.jdbc.Driver");
                                 con = DriverManager.getConnection("jdbc:mysql://localhost/jsp?user=eugenio&password=123456");
                                 st = con.createStatement();
-                                rs = st.executeQuery(" SELECT * FROM `user` where user='" + user + "' and password='" + getMD5(password) + "'; ");
+                                rs = st.executeQuery(" SELECT * FROM `user` where user='" + user + "' and password='" + enc.getMD5(password) + "'; ");
                                 while (rs.next()) {
                                     sesion.setAttribute("logueado", "1");
                                     sesion.setAttribute("user", rs.getString("user"));
@@ -56,21 +55,3 @@
         </div>
     </body>
 </html>
-<%!
-    public String getMD5(String input) {
-        try {
-
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] encBytes = md.digest(input.getBytes());
-            BigInteger numero = new BigInteger(1, encBytes);
-            String encString = numero.toString(16);
-            while (encString.length() < 32) {
-                encString = "0" + encString;
-            }
-            return encString;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-%>
