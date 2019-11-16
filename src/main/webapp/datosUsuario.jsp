@@ -1,3 +1,5 @@
+<%@page import="java.math.BigInteger"%>
+<%@page import="java.security.MessageDigest"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,7 +54,7 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost/jsp?user=eugenio&password=123456");
                     st = con.createStatement();
-                    st.executeUpdate("update user set user='" + user + "',password='" + password1 + "' where id='" + sesion.getAttribute("id") + "';");
+                    st.executeUpdate("update user set user='" + user + "',password='" + getMD5(password1) + "' where id='" + sesion.getAttribute("id") + "';");
                     sesion.setAttribute("user", user);
                     response.sendRedirect("index.jsp");
 
@@ -66,3 +68,21 @@
         }
     %>
 </html>
+<%!
+    public String getMD5(String input) {
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] encBytes = md.digest(input.getBytes());
+            BigInteger numero = new BigInteger(1, encBytes);
+            String encString = numero.toString(16);
+            while (encString.length() < 32) {
+                encString = "0" + encString;
+            }
+            return encString;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+%>
