@@ -1,5 +1,3 @@
-<%@page import="java.sql.*"%>
-<%@page import="com.mysql.jdbc.Driver"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,9 +13,6 @@
             if (sesion.getAttribute("logueado") == null || sesion.getAttribute("logueado").equals("0")) {
                 response.sendRedirect("login.jsp");
             }
-            Connection con = null;
-            Statement st = null;
-            ResultSet rs = null;
         %>
         <div class="container">
             <nav class="navbar navbar-light bg-light">
@@ -47,32 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%
-                                try {
-
-                                    Class.forName("com.mysql.jdbc.Driver");
-                                    con = DriverManager.getConnection("jdbc:mysql://localhost/jsp?user=eugenio&password=123456");
-                                    st = con.createStatement();
-                                    rs = st.executeQuery("SELECT * FROM `empledos`;");
-                                    while (rs.next()) {
-                            %>
-                            <tr>
-                                <th scope="row"><%= rs.getString(1)%></th>
-                                <td><%= rs.getString(2)%></td>
-                                <td><%= rs.getString(3)%></td>
-                                <td><%= rs.getString(4)%></td>
-                                <td>
-                                    <a href="editar.jsp?id=<%= rs.getString(1)%>&nombre=<%= rs.getString(2)%>&direccion=<%= rs.getString(3)%>&telefono=<%= rs.getString(4)%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="borrar.jsp?id=<%= rs.getString(1)%>" class="ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>                                    
-                            <%
-                                    }
-                                } catch (Exception e) {
-                                    out.print("error mysql " + e);
-                                }
-
-                            %>
+                            <jsp:include page="Empleados"/>
                         </tbody>
                     </table>
                 </div>
