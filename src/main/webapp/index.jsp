@@ -24,27 +24,36 @@
             </nav>
             <div class="row mt-2">
                 <div class="col-sm">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col" colspan="4" class="text-center"><h3>Empleados</h3></th>
-                                <th scope="col" >
-                                    <a href="crear.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                                </th>
+                    <form action="index.jsp" method="get">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center"></th>
+                                    <th scope="col" class="text-center">
+                                        <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre"/>
+                                    </th>
+                                    <th scope="col" class="text-center">
+                                        <input type="submit" value="Buscar" name="buscar" class="form-control btn btn-primary" />
+                                    </th>
+                                    <th></th>
+                                    <th scope="col" >
+                                        <a href="crear.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                    </th>
 
-                            </tr>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <jsp:include page="Empleados"/>
-                        </tbody>
-                    </table>
+                                </tr>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <jsp:include page="Empleados"/>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

@@ -46,7 +46,14 @@ public class Empleados extends HttpServlet {
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost/jsp?user=eugenio&password=123456");
                 st = con.createStatement();
-                rs = st.executeQuery("SELECT * FROM `empledos`;");
+                String query="SELECT * FROM `empledos` ";
+                String where=" where 1=1 ";
+                String nombre=request.getParameter("nombre");
+                if(nombre!=null){
+                    where=where+" and nombre='"+nombre+"' ";
+                }
+                query=query+where;
+                rs = st.executeQuery(query);
                 while (rs.next()) {
 
                     out.print("<tr>"
