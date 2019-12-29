@@ -14,7 +14,7 @@
             if (sesion.getAttribute("logueado") == null || sesion.getAttribute("logueado").equals("0")) {
                 response.sendRedirect("login.jsp");
             }
-            */
+            */ 
         %>
         <div class="container">
             <nav class="navbar navbar-light bg-light">

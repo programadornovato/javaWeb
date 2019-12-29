@@ -50,7 +50,7 @@ public class Empleados extends HttpServlet {
                 String where=" where 1=1 ";
                 String nombre=request.getParameter("nombre");
                 if(nombre!=null){
-                    where=where+" and nombre='"+nombre+"' ";
+                    where=where+" and nombre='"+nombre+"' "; 
                 }
                 query=query+where;
                 rs = st.executeQuery(query);
