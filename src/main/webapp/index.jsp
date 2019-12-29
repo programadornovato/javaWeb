@@ -9,16 +9,18 @@
     </head>
     <body>
         <%
+            /*
             HttpSession sesion = request.getSession();
             if (sesion.getAttribute("logueado") == null || sesion.getAttribute("logueado").equals("0")) {
                 response.sendRedirect("login.jsp");
             }
+            */
         %>
         <div class="container">
             <nav class="navbar navbar-light bg-light">
                 <a class="navbar-brand">Programador novato</a>
                 <form class="form-inline" action="logout.jsp">
-                    <a href="datosUsuario.jsp"><i class="fa fa-user-circle" aria-hidden="true"></i> <%= sesion.getAttribute("user")%></a>
+                    <a href="datosUsuario.jsp"><i class="fa fa-user-circle" aria-hidden="true"></i> </a>
                     <button class="btn btn-outline-danger my-2 my-sm-0 ml-2" type="submit">Log out</button>
                 </form>
             </nav>
@@ -30,7 +32,7 @@
                                 <tr>
                                     <th scope="col" class="text-center"></th>
                                     <th scope="col" class="text-center">
-                                        <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre"/>
+                                        <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre" value="<%=request.getParameter("nombre") %>" />
                                     </th>
                                     <th scope="col" class="text-center">
                                         <input type="submit" value="Buscar" name="buscar" class="form-control btn btn-primary" />
