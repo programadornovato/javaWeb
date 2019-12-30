@@ -54,11 +54,15 @@ public class Empleados extends HttpServlet {
                 if(nombre!=null){
                     //nombre=nombre.replaceAll("'", "\\\\'");
                     nombre=this.mysql_real_scape_string(nombre);
-                    where=where+" and nombre='"+nombre+"' "; 
+                    where=where+" and nombre=? "; 
                 }
                 query=query+where;
-                out.println(query);
-                rs = st.executeQuery(query);
+                //out.println(query);
+                PreparedStatement preparar=con.prepareStatement(query);
+                if(nombre!=null){
+                    preparar.setString(1, nombre);
+                }
+                rs=preparar.executeQuery();
                 while (rs.next()) {
 
                     out.print("<tr>"
